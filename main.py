@@ -4,7 +4,7 @@ import json
 import datetime
 
 cred_obj = firebase_admin.credentials.Certificate(
-    "./livemap-a9cb2-firebase-adminsdk-b1wqw-05b34ad07c.json"
+    "./firebase-credentials.json"
 )
 default_app = firebase_admin.initialize_app(
     cred_obj,
