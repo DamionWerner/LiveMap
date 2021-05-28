@@ -1,8 +1,12 @@
-var polyLineDataPoints = []
 getLocationHistory();
+var intervalId = window.setInterval(function(){
+    getLocationHistory();
+  }, 10000);
 function getLocationHistory() {
+    var polyLineDataPoints = []
     var locData;
     var dbref = firebase.database().ref('/');
+    var zoomLevel;
     dbref.limitToLast(20).on('value', function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
             var childData = childSnapshot.val();
@@ -14,6 +18,11 @@ function getLocationHistory() {
         var polyline = L.polyline(polyLineDataPoints, { color: 'red' }).addTo(map);
         console.log(polyLineDataPoints);
         var marker = L.marker(polyLineDataPoints[polyLineDataPoints.length -1]).addTo(map);
-        map.setView(polyLineDataPoints[polyLineDataPoints.length -1], 20);
+        if (typeof(map.getZoom()) !== "undefined"){
+            zoomLevel = map.getZoom();
+        } else {
+            zoomLevel = 15;
+        }
+        map.setView(polyLineDataPoints[polyLineDataPoints.length -1], zoomLevel);
     });
 }

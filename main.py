@@ -15,8 +15,8 @@ default_app = firebase_admin.initialize_app(
 ref = db.reference("/")
 
 location = {
-        'lat': 47.662440,
-        'lon': 9.448082,
+        'lat': 47.6577775,
+        'lon': 9.452870,
         'time': datetime.datetime.now().timestamp()
 }
 ref.push().set(location)
